@@ -7,32 +7,26 @@ namespace CustomAutowireApp
     {
         static void Main(string[] args)
         {
-            var startup = new Startup();
-            startup.Register<IService, Service>();
-
-            var controller = new Controller(startup.Get<IService>());
-
+            Startup.Init();            
+            var controller = Startup.Get<Controller>();
             Console.ReadLine();
         }
 
-        interface IService
+        public interface IService
         {
 
         }
 
-        class Service : IService
+        public class Service : IService
         {
-            public string Field { get; set; } = "Polje";
+            public string field = "Polje";
+            public string field2 = "polje20;";
         }
 
-        class Controller
+        public class Controller
         {
             private readonly IService service;
 
-            public Controller(IService service)
-            {
-                this.service = service;
-            }
         }
     }
 }
