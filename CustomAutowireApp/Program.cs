@@ -1,4 +1,6 @@
-﻿using CustomAutowireApp.IoCContainer;
+﻿using CustomAutowireApp.Controller;
+using CustomAutowireApp.IoCContainer;
+using CustomAutowireApp.Services;
 using System;
 
 namespace CustomAutowireApp
@@ -7,9 +9,10 @@ namespace CustomAutowireApp
     {
         static void Main(string[] args)
         {
-            Startup.Init();    
-            
+            Startup.Init();
 
+            var bean = Startup.Get<ApiController>();
+            bean.PrintService();
 
             Console.ReadLine();
         }

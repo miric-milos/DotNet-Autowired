@@ -1,4 +1,5 @@
-﻿using CustomAutowireApp.Services;
+﻿using CustomAutowireApp.Controller;
+using CustomAutowireApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -13,6 +14,7 @@ namespace CustomAutowireApp.IoCContainer
         private static Dictionary<Type, Func<object>> registry =
             new Dictionary<Type, Func<object>>();
 
+        private const string AutowiredName = "AutowiredAttribute";
 
         private static void Register<TType, TImpl>() where TImpl : TType, new()
         {
@@ -22,7 +24,7 @@ namespace CustomAutowireApp.IoCContainer
         public static void Init()
         {
             // add your dependencies here
-            Register<IService, Service>();
+            Register<IApiController, ApiController>();
         }
 
         public static T Get<T>() where T : new()
@@ -32,9 +34,14 @@ namespace CustomAutowireApp.IoCContainer
 
             foreach (var field in fields)
             {
-                if(registry.ContainsKey(field.FieldType))
+                var atts = field.GetCustomAttributes();
+
+                foreach(var att in atts)
                 {
-                    field.SetValue(obj, registry[field.FieldType].Invoke());
+                    if (att.GetType().Name.Equals(AutowiredName))
+                    {
+                        field.SetValue(obj, new Service());
+                    }
                 }
             }
 
