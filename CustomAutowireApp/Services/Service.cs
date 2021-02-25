@@ -4,7 +4,12 @@ using System.Text;
 
 namespace CustomAutowireApp.Services
 {
-    class Service
+    public class Service : IService
     {
+        public void Print()
+        {
+            Console.WriteLine("Print Service");
+        }
     }
+
 }

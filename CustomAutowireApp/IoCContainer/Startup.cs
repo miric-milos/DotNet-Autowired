@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CustomAutowireApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
-using static CustomAutowireApp.Program;
 
 namespace CustomAutowireApp.IoCContainer
 {
@@ -21,6 +21,7 @@ namespace CustomAutowireApp.IoCContainer
 
         public static void Init()
         {
+            // add your dependencies here
             Register<IService, Service>();
         }
 

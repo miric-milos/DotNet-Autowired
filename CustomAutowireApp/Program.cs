@@ -7,26 +7,12 @@ namespace CustomAutowireApp
     {
         static void Main(string[] args)
         {
-            Startup.Init();            
-            var controller = Startup.Get<Controller>();
+            Startup.Init();    
+            
+
+
             Console.ReadLine();
         }
 
-        public interface IService
-        {
-
-        }
-
-        public class Service : IService
-        {
-            public string field = "Polje";
-            public string field2 = "polje20;";
-        }
-
-        public class Controller
-        {
-            private readonly IService service;
-
-        }
     }
 }

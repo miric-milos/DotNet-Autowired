@@ -4,7 +4,9 @@ using System.Text;
 
 namespace CustomAutowireApp.Services
 {
-    interface IService
+    public interface IService
     {
+        void Print();
     }
+
 }
